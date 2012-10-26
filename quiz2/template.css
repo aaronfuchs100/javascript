@@ -1,0 +1,9 @@
+.box_class {
+
+     float: left;
+     width: 150px;
+     height: 150px;
+     margin: 11px;
+     border: 2px solid black;
+     border-radius: 5px;
+}

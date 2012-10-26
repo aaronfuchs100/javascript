@@ -1,44 +1,62 @@
 $(function(){
    
-    	$('.b2').click(withdraw);
-    	$('.b1').click(deposit);
+        $('.b2').click(withDraw);
+        $('.b1').click(deposit1);
+        $('.b4').click(withDraw2);
+        $('.b3').click(deposit2);
+
 });
 
-var balance = 1000;
+var balance = 850;
+var balance2 = 1000; 
+var total = balance + balance2
+// this is a global value
 
-function withdraw()
+function withDraw()
 {
-	var w_string = $('input').val();
-	var w_int = parseInt(w_string);
-	balance = balance - w_int
-	$('#balance > h2').text('$' + balance);
-   
-	if(balance < 0)
-	{
-    	$('#balance').css('background-color','red');
-    	$('#balance > h2').css('color','white');
-	}
-	else
-	{
-    	$('#balance').css('background-color','white');
-    	$('#balance > h2').css('color','black');
- 	}
+    var withdraw = $('#form > input').val();
+    withdraw = parseInt(withdraw);
+    
+    if (balance > withdraw)
+    {
+        balance = balance - withdraw;
+    }
+
+    else if (withdraw <= total)
+    {
+        var remainder = withdraw - balance;
+        balance = 0;
+        balance2 = balance2 - remainder;
+        total = balance2;
+    }
+
+    $('#balance > h2').text('$' + balance); 
+    $('#balance2 > h2').text('$' + balance2); 
 }
-function deposit()
+
+function deposit1()
 {
-	var d_string = $('input').val();
-	var d_int = parseInt(d_string);
-	balance = balance + d_int
-	$('#balance > h2').text('$' + balance);
-   
-	if(balance < 0)
-	{
-   	 $('#balance').css('background-color','red');
-   	$('#balance > h2').css('color','white');
-	}
-	else
-	{    
-   	 $('#balance').css('background-color','white');
-    	$('#balance > h2').css('color','black');
-	}
+    var deposit = $('#form > input').val();
+    deposit = parseInt(deposit);
+    balance = balance + deposit;
+    $('#balance > h2').text('$' + balance);  
+}
+
+function withDraw2()
+{
+    var withdraw = $('#form2 > input').val();
+    withdraw = parseInt(withdraw);
+
+    if (balance2 >= withdraw)
+        balance2 = balance2 - withdraw;
+
+    $('#balance2 > h2').text('$' + balance2); 
+}
+
+function deposit2()
+{
+    var deposit = $('#form2 > input').val();
+    deposit = parseInt(deposit);
+    balance2 = balance2 + deposit;
+    $('#balance2 > h2').text('$' + balance2);  
 }
